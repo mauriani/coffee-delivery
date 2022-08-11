@@ -1,0 +1,116 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Expresso Tradicional",
+      "description": "O tradicional café feito com água quente e grãos moídos",
+      "price": 9.9,
+      "type": ["Tradicional"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-tradicional.png"
+    },
+    {
+      "id": 2,
+      "title": "Expresso Americano",
+      "description": "Expresso diluído, menos intenso que o tradicional",
+      "price": 9.9,
+      "type": ["Tradicional"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-americano.png"
+    },
+    {
+      "id": 3,
+      "title": "Expresso Cremoso",
+      "description": "Café expresso tradicional com espuma cremosa",
+      "price": 9.9,
+      "type": ["Tradicional"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-cremoso.png"
+    },
+    {
+      "id": 4,
+      "title": "Expresso Gelado",
+      "description": "Bebida preparada com café expresso e cubos de gelo",
+      "price": 9.9,
+      "type": ["Tradicional", "gelado"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-gelado.png"
+    },
+    {
+      "id": 5,
+      "title": "Café com Leite",
+      "description": "Meio a meio de expresso tradicional com leite vaporizado",
+      "price": 9.9,
+      "type": ["Tradicional", "com leite"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-leite.png"
+    },
+    {
+      "id": 6,
+      "title": "Latte",
+      "description": "Uma dose de café expresso com o dobro de leite e espuma cremosa",
+      "price": 9.9,
+      "type": ["Tradicional", "com leite"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-latte.png"
+    },
+    {
+      "id": 6,
+      "title": "Capuccino",
+      "description": "Bebida com canela feita de doses iguais de café, leite e espuma",
+      "price": 9.9,
+      "type": ["Tradicional", "com leite"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-capuccino.png"
+    },
+    {
+      "id": 7,
+      "title": "Macchiato",
+      "description": "Café expresso misturado com um pouco de leite quente e espuma",
+      "price": 9.9,
+      "type": ["Tradicional", "com leite"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-macchiato.png"
+    },
+    {
+      "id": 8,
+      "title": "Mocaccino",
+      "description": "Café expresso com calda de chocolate, pouco leite e espuma",
+      "price": 9.9,
+      "type": ["Tradicional", "com leite"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-mocaccino.png"
+    },
+    {
+      "id": 9,
+      "title": "Chocolate Quente",
+      "description": "Bebida feita com chocolate dissolvido no leite quente e café",
+      "price": 9.9,
+      "type": ["especial", "com leite"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-chocolate-quente.png"
+    },
+    {
+      "id": 10,
+      "title": "Cubano",
+      "description": "Drink gelado de café expresso com rum, creme de leite e hortelã",
+      "price": 9.9,
+      "type": ["especial", "alcoólico", "gelado"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-cubano.png"
+    },
+    {
+      "id": 11,
+      "title": "Havaiano",
+      "description": "Bebida adocicada preparada com café e leite de coco",
+      "price": 9.9,
+      "type": ["especial"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-havaiano.png"
+    },
+    {
+      "id": 12,
+      "title": "Árabe",
+      "description": "Bebida preparada com grãos de café árabe e especiarias",
+      "price": 9.9,
+      "type": ["especial"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-arabe.png"
+    },
+    {
+      "id": 12,
+      "title": "Irlandês",
+      "description": "Bebida a base de café, uísque irlandês, açúcar e chantilly",
+      "price": 9.9,
+      "type": ["especial", "alcoólico"],
+      "image": "https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-irlandes.png"
+    }
+  ]
+}
