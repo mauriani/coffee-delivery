@@ -68,7 +68,7 @@ export function Menu() {
                 <span>{product.priceFormatted}</span>
 
                 <div>
-                  {/* <button type="button">
+                  <button type="button">
                     <MdRemove />
                   </button>
 
@@ -76,7 +76,7 @@ export function Menu() {
 
                   <button type="button">
                     <MdAdd />
-                  </button> */}
+                  </button>
                 </div>
 
                 <Icon>

@@ -92,13 +92,11 @@ export const Tags = styled.div`
 `;
 
 export const ContentPrice = styled.div`
-  margin-top: 33px;
-  padding: 0 24px;
-
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 
+  margin-top: 33px;
   width: 100%;
 
   > span {
@@ -111,27 +109,37 @@ export const ContentPrice = styled.div`
     color: ${(props) => props.theme["gray-600"]};
   }
 
-  > div {
+  div {
+    background-color: ${(props) => props.theme["gray-300"]};
+
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px;
 
-    width: 72px;
-    height: 38px;
+    padding: 8px 4px;
 
-    background-color: red;
+    border-radius: 6px;
 
     input {
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      color: #666;
       width: 30px;
+      height: 100%;
+
+      text-indent: 6px;
+      font-size: 16px;
+
+      border: 0;
+
+      margin: 0 4px;
+
+      background-color: ${(props) => props.theme["gray-300"]};
     }
 
     button {
       background-color: ${(props) => props.theme["gray-300"]};
+
+      width: 100%;
+      height: 100%;
       border: 0;
 
       svg {
@@ -141,18 +149,22 @@ export const ContentPrice = styled.div`
   }
 `;
 
-export const Icon = styled.div`
+export const Icon = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 38px;
-  height: 38px;
+  width: 2.375rem;
+  height: 2.375rem;
 
   border-radius: 6px;
   background-color: ${(props) => props.theme["purble-700"]};
 
   svg {
-    color: #fff;
+    color: ${(props) => props.theme["white-000"]};
+  }
+
+  :hover {
+    background-color: ${(props) => props.theme["purble-500"]};
   }
 `;
