@@ -24,7 +24,7 @@ export const ContainerHome = styled.div`
 `;
 
 export const ContainerHomeContents = styled.div`
-  margin-right: 3.5rem;
+  //margin-right: 3.5rem;
 
   header {
     h1 {

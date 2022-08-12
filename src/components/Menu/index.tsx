@@ -21,10 +21,16 @@ interface listProducts {
   price: number;
   priceFormatted: string;
   type: [];
+  amount: number;
 }
 
-export function Menu() {
+interface Props {
+  total?: (n: number) => void;
+}
+
+export function Menu({ total }: Props) {
   const [products, setProducts] = useState<listProducts[]>([]);
+  const [totalCart, setTotalCart] = useState(0);
 
   async function loadProducts() {
     const response = await api.get("products");
@@ -32,14 +38,63 @@ export function Menu() {
     const dataFormatted = response.data.map((product: listProducts) => ({
       ...product,
       priceFormatted: formatPrice(product.price),
+      amount: 0,
     }));
 
     setProducts(dataFormatted);
   }
 
+  function addItemCart(id: number) {
+    const newProduct = products.map((product) => {
+      if (id === product.id) {
+        console.log(product.amount);
+        return {
+          ...product,
+          amount: product.amount + 1,
+        };
+      } else {
+        return {
+          ...product,
+        };
+      }
+    });
+
+    setProducts(newProduct);
+  }
+
+  function removeItemCart(id: number) {
+    const newProduct = products.map((product) => {
+      if (id === product.id && product.amount > 0) {
+        return {
+          ...product,
+          amount: product.amount - 1,
+        };
+      } else {
+        return {
+          ...product,
+        };
+      }
+    });
+
+    setProducts(newProduct);
+  }
+
   useEffect(() => {
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    const totalItem = products.reduce((sum, product) => {
+      if (product.amount >= 1) {
+        return (sum = sum + 1);
+      }
+      return sum;
+    }, 0);
+
+    //setTotalCart(total);
+
+    if (total) total(totalItem);
+  }, [products]);
 
   return (
     <ContainerMenu>
@@ -48,7 +103,7 @@ export function Menu() {
       <Content>
         {products.map((product: listProducts) => {
           return (
-            <Card key={product.id}>
+            <Card key={product.id.toString()}>
               <img src={product.image} alt="" />
 
               <Tags>
@@ -68,13 +123,16 @@ export function Menu() {
                 <span>{product.priceFormatted}</span>
 
                 <div>
-                  <button type="button">
+                  <button
+                    type="button"
+                    onClick={() => removeItemCart(product.id)}
+                  >
                     <MdRemove />
                   </button>
 
-                  <input type="number" readOnly value={2} />
+                  <input type="number" readOnly value={product.amount} />
 
-                  <button type="button">
+                  <button type="button" onClick={() => addItemCart(product.id)}>
                     <MdAdd />
                   </button>
                 </div>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { LinkProps } from "react-router-dom";
+
 export const Container = styled.header`
   display: flex;
   flex-direction: row;
@@ -33,7 +35,7 @@ export const ContainerCart = styled.div`
 
   height: 38px;
 
-  div {
+  > div {
     display: flex;
     align-items: center;
 
@@ -54,7 +56,11 @@ export const ContainerCart = styled.div`
   }
 `;
 
-export const ButtonTotalCart = styled.button`
+export const ButtonTotalCart = styled.button<LinkProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 38px;
   height: 38px;
   border: 0;
@@ -68,4 +74,25 @@ export const ButtonTotalCart = styled.button`
   svg {
     color: ${(props) => props.theme["yellow-500"]};
   }
+`;
+
+export const TotalCart = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+
+  width: 20px;
+  height: 20px;
+
+  background: ${(props) => props.theme["yellow-500"]};
+
+  top: 20px;
+
+  border-radius: 100%;
+
+  color: ${(props) => props.theme["white-000"]};
+  font-size: 12px;
+  font-weight: 700;
 `;

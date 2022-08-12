@@ -35,7 +35,7 @@ export const Card = styled.div`
   width: 100%;
 
   width: 16rem;
-  height: 19.4rem;
+  height: 19.5rem;
   border-radius: 6px 36px;
 
   background-color: ${(props) => props.theme["gray-100"]};
@@ -146,6 +146,10 @@ export const ContentPrice = styled.div`
         color: ${(props) => props.theme["purble-500"]};
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 15px;
   }
 `;
 
