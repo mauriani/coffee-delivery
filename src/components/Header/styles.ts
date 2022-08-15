@@ -56,7 +56,7 @@ export const ContainerCart = styled.div`
   }
 `;
 
-export const ButtonTotalCart = styled.button<LinkProps>`
+export const ButtonTotalCart = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,6 +1,7 @@
+import React from "react";
 import { MdLocationOn } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../assets/Logo.svg";
 
@@ -11,6 +12,11 @@ interface PropsHeader {
 }
 
 export function Header({ totalCart }: PropsHeader) {
+  const navigate = useNavigate();
+
+  function handleNavigateToPayment() {
+    navigate("/payment");
+  }
   return (
     <Container>
       <img src={logo} alt="" />
@@ -21,7 +27,7 @@ export function Header({ totalCart }: PropsHeader) {
           Porto Alegre, RS
         </div>
 
-        <ButtonTotalCart type="button" component={Link} to={"/payment"}>
+        <ButtonTotalCart type="button" onClick={handleNavigateToPayment}>
           <FaShoppingCart size={22} />
           {totalCart > 0 && <TotalCart>{totalCart}</TotalCart>}
         </ButtonTotalCart>
