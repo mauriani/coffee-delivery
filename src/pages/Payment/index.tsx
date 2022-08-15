@@ -1,9 +1,15 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
-import { ContainerPayment, ContainerAddress, TextInput } from "./styles";
+import {
+  ContainerPayment,
+  ContainerAddress,
+  TextInput,
+  ContainerFormOfPayment,
+} from "./styles";
 
-import { MdLocationOn } from "react-icons/md";
-
+import { MdLocationOn, MdOutlineAttachMoney } from "react-icons/md";
+import { BiCreditCard, BiMoney } from "react-icons/bi";
+import { BsBank } from "react-icons/bs";
 interface IBGEUFResponse {
   sigla: string;
 }
@@ -69,6 +75,33 @@ export function Payment() {
             </div>
           </footer>
         </ContainerAddress>
+
+        <ContainerFormOfPayment>
+          <header>
+            <MdOutlineAttachMoney size={22} />
+            <div>
+              <h2>Pagamento</h2>
+              <p>
+                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+              </p>
+            </div>
+          </header>
+
+          <footer>
+            <button>
+              <BiCreditCard size={16} />
+              Cartão de crédito
+            </button>
+            <button>
+              <BsBank size={16} />
+              cartão de débito
+            </button>
+            <button>
+              <BiMoney size={16} />
+              dinheiro
+            </button>
+          </footer>
+        </ContainerFormOfPayment>
       </div>
 
       <div>
