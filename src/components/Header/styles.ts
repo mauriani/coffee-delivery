@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { LinkProps } from "react-router-dom";
-
 export const Container = styled.header`
   display: flex;
   flex-direction: row;
@@ -61,6 +59,10 @@ export const ButtonTotalCart = styled.button`
   justify-content: center;
   align-items: center;
 
+  padding: 8px;
+
+  position: relative;
+
   width: 38px;
   height: 38px;
   border: 0;
@@ -83,12 +85,14 @@ export const TotalCart = styled.span`
 
   position: absolute;
 
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 
   background: ${(props) => props.theme["yellow-500"]};
 
-  top: 20px;
+  position: absolute;
+  top: -8px;
+  right: -8.35px;
 
   border-radius: 100%;
 

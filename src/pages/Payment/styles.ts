@@ -6,7 +6,7 @@ export const ContainerPayment = styled.main`
   flex: 1;
   flex-direction: row;
 
-  padding: 2.5rem 10rem 15rem 10rem;
+  padding: 0 10rem 15rem 10rem;
 
   div {
     h1 {
