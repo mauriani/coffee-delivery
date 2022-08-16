@@ -63,8 +63,8 @@ export const ButtonTotalCart = styled.button`
 
   position: relative;
 
-  width: 38px;
-  height: 38px;
+  width: 2.375rem;
+  height: 2.375rem;
   border: 0;
 
   border-radius: 6px;
