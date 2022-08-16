@@ -204,11 +204,32 @@ export const ContainerProducts = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     margin-left: 0;
+    align-items: center;
   }
 `;
 
 export const ContentProducts = styled.div`
   padding: 2.5rem;
+
+  button {
+    width: 23rem;
+    height: 2.875rem;
+    border-radius: 6px;
+
+    font-weight: 700;
+    font-size: 0.875rem;
+
+    text-transform: uppercase;
+    color: ${(props) => props.theme["white-000"]};
+    border: 0;
+
+    background-color: ${(props) => props.theme["yellow-400"]};
+
+    :hover {
+      background-color: ${(props) => props.theme["yellow-500"]};
+      transition: all 0.2s;
+    }
+  }
 `;
 
 export const CardItem = styled.div`
@@ -357,6 +378,10 @@ export const ContentButtonAddRemove = styled.footer`
       box-shadow: 0px 0px 0px 2px transparent;
     }
 
+    :hover {
+      background-color: ${(props) => props.theme["gray-300"]};
+    }
+
     svg {
       color: ${(props) => props.theme["purble-500"]};
     }
@@ -373,6 +398,8 @@ export const Line = styled.div`
 export const ContainerTotal = styled.div`
   display: flex;
   flex-direction: column;
+
+  margin-bottom: 24px;
 
   div {
     display: flex;
@@ -403,5 +430,9 @@ export const ContainerTotal = styled.div`
 
       color: ${(props) => props.theme["gray-700"]};
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;

@@ -246,6 +246,8 @@ export function Payment() {
                 <span>R$ 33,20</span>
               </footer>
             </ContainerTotal>
+
+            <button>confirmar pedido</button>
           </ContentProducts>
         </ContainerProducts>
       </div>
