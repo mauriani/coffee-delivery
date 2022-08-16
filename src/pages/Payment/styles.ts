@@ -5,11 +5,8 @@ export const ContainerPayment = styled.main`
 
   flex: 1;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 
-  padding: 0 160px;
-  margin-bottom: 2.5rem;
+  padding: 2.5rem 10rem 15rem 10rem;
 
   div {
     h1 {
@@ -28,6 +25,32 @@ export const ContainerPayment = styled.main`
   }
 `;
 
+export const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+
+  div {
+    h2 {
+      font-weight: 400;
+      font-size: 1rem;
+      color: ${(props) => props.theme["gray-700"]};
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 0.87rem;
+      color: ${(props) => props.theme["gray-600"]};
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+`;
+
 export const ContainerAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,52 +62,11 @@ export const ContainerAddress = styled.div`
 
   background-color: ${(props) => props.theme["gray-100"]};
 
-  > header {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-
-    padding: 40px 40px 32px 40px;
-
-    div {
-      h2 {
-        font-weight: 400;
-        font-size: 1rem;
-        color: ${(props) => props.theme["gray-700"]};
-      }
-
-      p {
-        font-weight: 400;
-        font-size: 0.87rem;
-        color: ${(props) => props.theme["gray-600"]};
-      }
-    }
-
-    svg {
-      color: ${(props) => props.theme["yellow-500"]};
-    }
+  svg {
+    color: ${(props) => props.theme["yellow-500"]};
   }
 
   footer {
-    padding: 32px 40px 40px 40px;
-    div {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-
-      select {
-        background-color: ${(props) => props.theme["gray-200"]};
-        height: 42px;
-
-        border: 0;
-        border-radius: 4px;
-
-        font-family: "Roboto";
-        font-weight: 400;
-        font-size: 0.875rem;
-        color: ${(props) => props.theme["gray-700"]};
-      }
-    }
   }
 
   @media (max-width: 768px) {
@@ -93,20 +75,30 @@ export const ContainerAddress = styled.div`
     justify-content: center;
     width: 100%;
 
-    header {
-      padding: 1rem;
-    }
-
     footer {
       padding: 1.05rem;
     }
   }
 `;
 
+export const FormAddress = styled.footer`
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.05rem;
+  }
+`;
+
 export const TextInput = styled.input`
   background-color: ${(props) => props.theme["gray-200"]};
 
-  height: 42px;
+  height: 2.625rem;
   width: 100%;
   margin-bottom: 16px;
   margin-right: 10px;
@@ -133,48 +125,27 @@ export const ContainerFormOfPayment = styled.div`
 
   background-color: ${(props) => props.theme["gray-100"]};
 
-  header {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-
-    padding: 40px 40px 32px 40px;
-
-    div {
-      h2 {
-        font-weight: 400;
-        font-size: 1rem;
-        color: ${(props) => props.theme["gray-700"]};
-      }
-
-      p {
-        font-weight: 400;
-        font-size: 0.87rem;
-        color: ${(props) => props.theme["gray-600"]};
-      }
-    }
-
-    svg {
-      color: ${(props) => props.theme["purble-500"]};
-    }
+  svg {
+    color: ${(props) => props.theme["purble-500"]};
   }
 
   > footer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 0 40px 40px 40px;
+    padding: 0 2.5rem 2.5rem 2.5rem;
 
     button {
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding: 16px;
+      padding: 1rem;
 
       border: 0;
 
-      height: 51px;
-      width: 178.67px;
+      height: 3.19rem;
+      width: 11.16rem;
+      border-radius: 6px;
 
       background-color: ${(props) => props.theme["gray-300"]};
 
@@ -187,9 +158,13 @@ export const ContainerFormOfPayment = styled.div`
         margin-right: 12px;
       }
 
+      :focus {
+        box-shadow: 0px 0px 0px 2px ${(props) => props.theme["purble-500"]};
+      }
+
       :hover {
-        box-shadow: none;
-        border-color: ${(props) => props.theme["purble-500"]};
+        background-color: ${(props) => props.theme["gray-400"]};
+        transition: all 0.2s;
       }
     }
   }
@@ -202,9 +177,6 @@ export const ContainerFormOfPayment = styled.div`
 
     width: 100%;
 
-    header {
-    }
-
     footer {
       display: flex;
       flex-direction: column;
@@ -212,6 +184,224 @@ export const ContainerFormOfPayment = styled.div`
       button {
         margin-bottom: 16px;
       }
+    }
+  }
+`;
+
+export const ContainerProducts = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 28rem;
+  border-radius: 6px 44px;
+
+  margin-top: 15px;
+  margin-left: 32px;
+
+  background-color: ${(props) => props.theme["gray-100"]};
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+  }
+`;
+
+export const ContentProducts = styled.div`
+  padding: 2.5rem;
+`;
+
+export const CardItem = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 20px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1 {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: ${(props) => props.theme["gray-700"]};
+    }
+
+    // div dos botões
+    > div {
+      flex-direction: row;
+      justify-content: center;
+
+      > button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        margin-left: 4px;
+
+        width: 5.69rem;
+        height: 2rem;
+        border: 0;
+        border-radius: 6px;
+
+        font-weight: 400;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: ${(props) => props.theme["gray-600"]};
+
+        background-color: ${(props) => props.theme["gray-300"]};
+
+        svg {
+          color: ${(props) => props.theme["purble-500"]};
+        }
+
+        :focus {
+          display: none;
+        }
+
+        :hover {
+          background-color: ${(props) => props.theme["gray-400"]};
+          transition: all 0.2s;
+        }
+      }
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    span {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1rem;
+      color: ${(props) => props.theme["gray-600"]};
+    }
+  }
+
+  @media (max-width: 768px) {
+    header {
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          margin-top: 4px;
+        }
+      }
+    }
+
+    div {
+      margin-left: 5px;
+    }
+  }
+`;
+
+export const ContentButtonAddRemove = styled.footer`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 4px;
+
+  width: 4.5rem;
+  height: 1.875rem;
+
+  background-color: ${(props) => props.theme["gray-300"]};
+
+  border-radius: 6px;
+
+  padding: 1px;
+
+  input {
+    width: 50%;
+    height: 100%;
+
+    text-indent: 6px;
+    font-size: 16px;
+
+    border: 0;
+
+    background-color: ${(props) => props.theme["gray-300"]};
+
+    :focus {
+      display: block;
+      box-shadow: 0px 0px 0px 2px transparent;
+    }
+  }
+
+  button {
+    background-color: ${(props) => props.theme["gray-300"]};
+
+    width: 30%;
+    height: 100%;
+
+    border: 0;
+
+    :focus {
+      display: block;
+      box-shadow: 0px 0px 0px 2px transparent;
+    }
+
+    svg {
+      color: ${(props) => props.theme["purble-500"]};
+    }
+  }
+`;
+
+export const Line = styled.div`
+  width: 23rem;
+  border: 1px solid #e6e5e5;
+
+  margin: 24px 0;
+`;
+
+export const ContainerTotal = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-bottom: 13px;
+
+    p {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 0.875rem;
+      color: ${(props) => props.theme["gray-600"]};
+    }
+  }
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    span {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.25rem;
+
+      color: ${(props) => props.theme["gray-700"]};
     }
   }
 `;

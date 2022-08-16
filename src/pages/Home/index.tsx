@@ -22,8 +22,6 @@ export function Home() {
   }
   return (
     <main>
-      {/* <Header totalCart={total} /> */}
-
       <ContainerHome>
         <ContainerHomeContents>
           <header>
