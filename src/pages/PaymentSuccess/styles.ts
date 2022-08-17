@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
+interface IconProps {
+  color: "yellow-500" | "yellow-400" | "purble-500";
+}
+
 export const ContainerSuccess = styled.main`
   display: flex;
   flex-direction: column;
+
+  align-items: flex-start;
 
   > div {
     padding: 0 10rem;
@@ -23,9 +29,15 @@ export const ContainerSuccess = styled.main`
       font-size: 1.25rem;
     }
   }
+
+  @media (max-width: 768px) {
+    div {
+      padding: 1rem;
+    }
+  }
 `;
 
-export const ContentSuccess = styled.div`
+export const ContentSuccess = styled.aside`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,18 +51,65 @@ export const ContentSuccess = styled.div`
     height: 18.313rem;
   }
 
-  div {
+  > div {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
-    width: 526px;
-    height: 270px;
+    width: 32.875rem;
 
     border-radius: 6px 36px;
+    padding: 2.5rem;
 
-    border: 1px solid;
+    border-radius: 6px 36px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: ${(props) => props.theme["purble-500"]};
 
-    border-image: linear-gradient(102.89deg, #dbac2c 2.61%, #8047f8 98.76%);
+    div {
+      border: 0;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: row;
+
+      p {
+        font-weight: 400;
+        font-size: 1rem;
+        color: ${(props) => props.theme["gray-600"]};
+
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+  }
+`;
+
+export const IconContainer = styled.button<IconProps>`
+  border: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+
+  margin-right: 8px;
+
+  height: 2rem;
+  width: 2rem;
+
+  background-color: ${(props) => props.theme[props.color]};
+  border-radius: 1000px;
+
+  svg {
+    color: ${(props) => props.theme["white-000"]};
   }
 `;
