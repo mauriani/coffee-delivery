@@ -1,5 +1,16 @@
-import React, { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent, useContext, Fragment } from "react";
 import axios from "axios";
+
+import {
+  MdLocationOn,
+  MdOutlineAttachMoney,
+  MdRemove,
+  MdAdd,
+} from "react-icons/md";
+import { BiCreditCard, BiMoney } from "react-icons/bi";
+import { BsBank } from "react-icons/bs";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 import {
   ContainerPayment,
   ContainerAddress,
@@ -15,17 +26,28 @@ import {
   ContainerTotal,
 } from "./styles";
 
-import {
-  MdLocationOn,
-  MdOutlineAttachMoney,
-  MdRemove,
-  MdAdd,
-} from "react-icons/md";
-import { BiCreditCard, BiMoney } from "react-icons/bi";
-import { BsBank } from "react-icons/bs";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { CartContext } from "../../contexts/CartContext";
+import { formatPrice } from "../../util/format";
+
+interface registerAddressProps {
+  zipCode: string;
+  road: string;
+  houseNumber: string;
+  complement?: string;
+  city: string;
+  district: string;
+  uf: string;
+}
 
 export function Payment() {
+  const { products, addItemCart, removeItemCart } = useContext(CartContext);
+
+  const [totalItens, setTotalItems] = useState("");
+  const [valueWithShipping, setValueWithShipping] = useState("");
+  const [registerAddress, setRegisterAddress] = useState<
+    registerAddressProps[]
+  >([]);
+
   const [selectUf, setSelectUf] = useState("");
   const [selectCity, setSelectCity] = useState("");
 
@@ -37,6 +59,8 @@ export function Payment() {
     const zipCode = event.target.value;
     setSelectZipCode(zipCode);
   }
+
+  function handleRegisterAddress() {}
 
   useEffect(() => {
     async function handleLoadZipCode() {
@@ -65,9 +89,23 @@ export function Payment() {
     handleLoadZipCode();
   }, [selectZipCode]);
 
+  useEffect(() => {
+    if (products.length > 0) {
+      const totalItens = products
+        .filter((product) => product.amount >= 1)
+        .map((product) => {
+          return product.amount * product.price;
+        })
+        .reduce((total, currentValue) => total + currentValue);
+
+      setTotalItems(formatPrice(totalItens));
+      setValueWithShipping(formatPrice(totalItens + 3.5));
+    }
+  }, [products]);
+
   return (
-    <ContainerPayment>
-      <div>
+    <ContainerPayment name="form" id="form" action="">
+      <form>
         <h1>Complete seu pedido</h1>
         <ContainerAddress>
           <Header>
@@ -152,88 +190,66 @@ export function Payment() {
             </button>
           </footer>
         </ContainerFormOfPayment>
-      </div>
+      </form>
 
       <div>
         <h1>Cafés selecionados</h1>
         <ContainerProducts>
           <ContentProducts>
-            <CardItem>
-              <img
-                src="https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-irlandes.png"
-                alt=""
-              />
+            {products
+              .filter((product) => product.amount >= 1)
+              .map((product) => {
+                return (
+                  <Fragment key={product.id}>
+                    <CardItem>
+                      <img src={product.image} alt="" />
 
-              <header>
-                <h1>Expresso Tradicional</h1>
+                      <header>
+                        <h1>{product.title}</h1>
 
-                <div>
-                  <ContentButtonAddRemove>
-                    <button type="button">
-                      <MdRemove />
-                    </button>
+                        <div>
+                          <ContentButtonAddRemove>
+                            <button
+                              type="button"
+                              onClick={() => removeItemCart(product.id)}
+                            >
+                              <MdRemove />
+                            </button>
 
-                    <input type="number" readOnly value={1} />
+                            <input
+                              type="number"
+                              readOnly
+                              value={product.amount}
+                            />
 
-                    <button type="button">
-                      <MdAdd />
-                    </button>
-                  </ContentButtonAddRemove>
+                            <button
+                              type="button"
+                              onClick={() => addItemCart(product.id)}
+                            >
+                              <MdAdd />
+                            </button>
+                          </ContentButtonAddRemove>
 
-                  <button>
-                    <RiDeleteBin6Line size={16} />
-                    Remover
-                  </button>
-                </div>
-              </header>
+                          <button>
+                            <RiDeleteBin6Line size={16} />
+                            Remover
+                          </button>
+                        </div>
+                      </header>
 
-              <div>
-                <span>R$ 9,90</span>
-              </div>
-            </CardItem>
-
-            <Line />
-
-            <CardItem>
-              <img
-                src="https://coffeedelivery.s3.us-east-2.amazonaws.com/Coffee-irlandes.png"
-                alt=""
-              />
-
-              <header>
-                <h1>Expresso Tradicional</h1>
-
-                <div>
-                  <ContentButtonAddRemove>
-                    <button type="button">
-                      <MdRemove />
-                    </button>
-
-                    <input type="number" readOnly value={1} />
-
-                    <button type="button">
-                      <MdAdd />
-                    </button>
-                  </ContentButtonAddRemove>
-
-                  <button>
-                    <RiDeleteBin6Line size={16} />
-                    Remover
-                  </button>
-                </div>
-              </header>
-
-              <div>
-                <span>R$ 9,90</span>
-              </div>
-            </CardItem>
-
-            <Line />
+                      <div>
+                        <span>{product.priceFormatted}</span>
+                      </div>
+                    </CardItem>
+                    <Line />
+                  </Fragment>
+                );
+              })}
 
             <ContainerTotal>
               <div>
                 <p>Total de itens</p>
-                <span>R$ 29,70</span>
+                <span>{totalItens}</span>
               </div>
 
               <div>
@@ -243,7 +259,7 @@ export function Payment() {
 
               <footer>
                 <span>Total</span>
-                <span>R$ 33,20</span>
+                <span>{valueWithShipping}</span>
               </footer>
             </ContainerTotal>
 

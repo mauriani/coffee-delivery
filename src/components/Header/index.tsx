@@ -1,17 +1,16 @@
-import React from "react";
+import { useContext } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../../assets/Logo.svg";
+import { CartContext } from "../../contexts/CartContext";
 
 import { Container, ContainerCart, ButtonTotalCart, TotalCart } from "./styles";
 
-interface PropsHeader {
-  totalCart: number;
-}
+export function Header() {
+  const { totalCart } = useContext(CartContext);
 
-export function Header({ totalCart }: PropsHeader) {
   const navigate = useNavigate();
 
   function handleNavigateToPayment() {

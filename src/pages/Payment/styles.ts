@@ -8,7 +8,7 @@ export const ContainerPayment = styled.main`
 
   padding: 0 10rem 15rem 10rem;
 
-  div {
+  form {
     h1 {
       font-weight: 700;
       font-family: "Baloo 2";

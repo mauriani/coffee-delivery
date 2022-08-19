@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdAdd, MdRemove } from "react-icons/md";
 
 import api from "../../services/api";
 import { formatPrice } from "../../util/format";
+import { CartContext } from "../../contexts/CartContext";
 import {
   ContainerMenu,
   Content,
@@ -24,77 +25,8 @@ interface listProducts {
   amount: number;
 }
 
-interface Props {
-  total?: (n: number) => void;
-}
-
-export function Menu({ total }: Props) {
-  const [products, setProducts] = useState<listProducts[]>([]);
-  const [totalCart, setTotalCart] = useState(0);
-
-  async function loadProducts() {
-    const response = await api.get("products");
-
-    const dataFormatted = response.data.map((product: listProducts) => ({
-      ...product,
-      priceFormatted: formatPrice(product.price),
-      amount: 0,
-    }));
-
-    setProducts(dataFormatted);
-  }
-
-  function addItemCart(id: number) {
-    const newProduct = products.map((product) => {
-      if (id === product.id) {
-        console.log(product.amount);
-        return {
-          ...product,
-          amount: product.amount + 1,
-        };
-      } else {
-        return {
-          ...product,
-        };
-      }
-    });
-
-    setProducts(newProduct);
-  }
-
-  function removeItemCart(id: number) {
-    const newProduct = products.map((product) => {
-      if (id === product.id && product.amount > 0) {
-        return {
-          ...product,
-          amount: product.amount - 1,
-        };
-      } else {
-        return {
-          ...product,
-        };
-      }
-    });
-
-    setProducts(newProduct);
-  }
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  useEffect(() => {
-    const totalItem = products.reduce((sum, product) => {
-      if (product.amount >= 1) {
-        return (sum = sum + 1);
-      }
-      return sum;
-    }, 0);
-
-    //setTotalCart(total);
-
-    if (total) total(totalItem);
-  }, [products]);
+export function Menu() {
+  const { products, addItemCart, removeItemCart } = useContext(CartContext);
 
   return (
     <ContainerMenu>
@@ -103,7 +35,7 @@ export function Menu({ total }: Props) {
       <Content>
         {products.map((product: listProducts) => {
           return (
-            <Card key={product.id.toString()}>
+            <Card key={product.id}>
               <img src={product.image} alt="" />
 
               <Tags>

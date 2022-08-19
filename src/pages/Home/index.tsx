@@ -12,14 +12,8 @@ import {
 } from "./styles";
 
 import { Menu } from "../../components/Menu";
-import { useState } from "react";
 
 export function Home() {
-  const [total, setTotal] = useState(0);
-
-  function controlTheQuantityOfItemsInTheCart(total: number) {
-    setTotal(total);
-  }
   return (
     <main>
       <ContainerHome>
@@ -76,7 +70,7 @@ export function Home() {
         </ContainerHomeImage>
       </ContainerHome>
 
-      <Menu total={controlTheQuantityOfItemsInTheCart} />
+      <Menu />
     </main>
   );
 }
