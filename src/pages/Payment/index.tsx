@@ -104,169 +104,172 @@ export function Payment() {
   }, [products]);
 
   return (
-    <ContainerPayment name="form" id="form" action="">
-      <form>
-        <h1>Complete seu pedido</h1>
-        <ContainerAddress>
-          <Header>
-            <MdLocationOn size={22} />
-            <div>
-              <h2>Endereço de Entrega</h2>
-              <p>Informe o endereço onde deseja receber seu pedido</p>
-            </div>
-          </Header>
+    <ContainerPayment>
+      <form name="form" id="form" action="">
+        <div>
+          <h1>Complete seu pedido</h1>
+          <ContainerAddress>
+            <Header>
+              <MdLocationOn size={22} />
+              <div>
+                <h2>Endereço de Entrega</h2>
+                <p>Informe o endereço onde deseja receber seu pedido</p>
+              </div>
+            </Header>
 
-          <FormAddress>
-            <TextInput
-              placeholder="CEP"
-              name="cep"
-              type="text"
-              pattern="[0-9]{5}"
-              value={selectZipCode}
-              onChange={handleSelectZipCode}
-              required
-            />
-            <TextInput
-              placeholder="Rua"
-              name="address"
-              defaultValue={address}
-              required
-            />
-
-            <div>
-              <TextInput placeholder="Número" name="Número" required />
-              <TextInput placeholder="Complemento" name="Complemento" />
-            </div>
-
-            <div>
+            <FormAddress>
               <TextInput
-                placeholder="Bairro"
-                name="district"
-                defaultValue={district}
+                placeholder="CEP"
+                name="cep"
+                type="text"
+                pattern="[0-9]{5}"
+                value={selectZipCode}
+                onChange={handleSelectZipCode}
                 required
               />
               <TextInput
-                placeholder="Cidade"
-                name="city"
-                id="city"
-                defaultValue={selectCity}
+                placeholder="Rua"
+                name="address"
+                defaultValue={address}
                 required
               />
 
-              <TextInput
-                placeholder="UF"
-                name="uf"
-                id="uf"
-                defaultValue={selectUf}
-                required
-              />
-            </div>
-          </FormAddress>
-        </ContainerAddress>
+              <div>
+                <TextInput placeholder="Número" name="Número" required />
+                <TextInput placeholder="Complemento" name="Complemento" />
+              </div>
 
-        <ContainerFormOfPayment>
-          <Header>
-            <MdOutlineAttachMoney size={22} />
-            <div>
-              <h2>Pagamento</h2>
-              <p>
-                O pagamento é feito na entrega. Escolha a forma que deseja pagar
-              </p>
-            </div>
-          </Header>
+              <div>
+                <TextInput
+                  placeholder="Bairro"
+                  name="district"
+                  defaultValue={district}
+                  required
+                />
+                <TextInput
+                  placeholder="Cidade"
+                  name="city"
+                  id="city"
+                  defaultValue={selectCity}
+                  required
+                />
 
-          <footer>
-            <button>
-              <BiCreditCard size={16} />
-              Cartão de crédito
-            </button>
-            <button>
-              <BsBank size={16} />
-              cartão de débito
-            </button>
-            <button>
-              <BiMoney size={16} />
-              dinheiro
-            </button>
-          </footer>
-        </ContainerFormOfPayment>
-      </form>
+                <TextInput
+                  placeholder="UF"
+                  name="uf"
+                  id="uf"
+                  defaultValue={selectUf}
+                  required
+                />
+              </div>
+            </FormAddress>
+          </ContainerAddress>
 
-      <div>
-        <h1>Cafés selecionados</h1>
-        <ContainerProducts>
-          <ContentProducts>
-            {products
-              .filter((product) => product.amount >= 1)
-              .map((product) => {
-                return (
-                  <Fragment key={product.id}>
-                    <CardItem>
-                      <img src={product.image} alt="" />
+          <ContainerFormOfPayment>
+            <Header>
+              <MdOutlineAttachMoney size={22} />
+              <div>
+                <h2>Pagamento</h2>
+                <p>
+                  O pagamento é feito na entrega. Escolha a forma que deseja
+                  pagar
+                </p>
+              </div>
+            </Header>
 
-                      <header>
-                        <h1>{product.title}</h1>
+            <footer>
+              <button>
+                <BiCreditCard size={16} />
+                Cartão de crédito
+              </button>
+              <button>
+                <BsBank size={16} />
+                cartão de débito
+              </button>
+              <button>
+                <BiMoney size={16} />
+                dinheiro
+              </button>
+            </footer>
+          </ContainerFormOfPayment>
+        </div>
+
+        <div>
+          <h1>Cafés selecionados</h1>
+          <ContainerProducts>
+            <ContentProducts>
+              {products
+                .filter((product) => product.amount >= 1)
+                .map((product) => {
+                  return (
+                    <Fragment key={product.id}>
+                      <CardItem>
+                        <img src={product.image} alt="" />
+
+                        <header>
+                          <h1>{product.title}</h1>
+
+                          <div>
+                            <ContentButtonAddRemove>
+                              <button
+                                type="button"
+                                onClick={() => removeItemCart(product.id)}
+                              >
+                                <MdRemove />
+                              </button>
+
+                              <input
+                                type="number"
+                                readOnly
+                                value={product.amount}
+                              />
+
+                              <button
+                                type="button"
+                                onClick={() => addItemCart(product.id)}
+                              >
+                                <MdAdd />
+                              </button>
+                            </ContentButtonAddRemove>
+
+                            <button>
+                              <RiDeleteBin6Line size={16} />
+                              Remover
+                            </button>
+                          </div>
+                        </header>
 
                         <div>
-                          <ContentButtonAddRemove>
-                            <button
-                              type="button"
-                              onClick={() => removeItemCart(product.id)}
-                            >
-                              <MdRemove />
-                            </button>
-
-                            <input
-                              type="number"
-                              readOnly
-                              value={product.amount}
-                            />
-
-                            <button
-                              type="button"
-                              onClick={() => addItemCart(product.id)}
-                            >
-                              <MdAdd />
-                            </button>
-                          </ContentButtonAddRemove>
-
-                          <button>
-                            <RiDeleteBin6Line size={16} />
-                            Remover
-                          </button>
+                          <span>{product.priceFormatted}</span>
                         </div>
-                      </header>
+                      </CardItem>
+                      <Line />
+                    </Fragment>
+                  );
+                })}
 
-                      <div>
-                        <span>{product.priceFormatted}</span>
-                      </div>
-                    </CardItem>
-                    <Line />
-                  </Fragment>
-                );
-              })}
+              <ContainerTotal>
+                <div>
+                  <p>Total de itens</p>
+                  <span>{totalItens}</span>
+                </div>
 
-            <ContainerTotal>
-              <div>
-                <p>Total de itens</p>
-                <span>{totalItens}</span>
-              </div>
+                <div>
+                  <p>Entrega</p>
+                  <span>R$ 3,50</span>
+                </div>
 
-              <div>
-                <p>Entrega</p>
-                <span>R$ 3,50</span>
-              </div>
+                <footer>
+                  <span>Total</span>
+                  <span>{valueWithShipping}</span>
+                </footer>
+              </ContainerTotal>
 
-              <footer>
-                <span>Total</span>
-                <span>{valueWithShipping}</span>
-              </footer>
-            </ContainerTotal>
-
-            <button>confirmar pedido</button>
-          </ContentProducts>
-        </ContainerProducts>
-      </div>
+              <button type="submit">confirmar pedido</button>
+            </ContentProducts>
+          </ContainerProducts>
+        </div>
+      </form>
     </ContainerPayment>
   );
 }

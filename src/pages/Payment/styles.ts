@@ -9,11 +9,16 @@ export const ContainerPayment = styled.main`
   padding: 0 10rem 15rem 10rem;
 
   form {
-    h1 {
-      font-weight: 700;
-      font-family: "Baloo 2";
-      font-size: 1.125rem;
-      color: ${(props) => props.theme["gray-800"]};
+    display: flex;
+    flex: 1;
+
+    div {
+      > h1 {
+        font-weight: 700;
+        font-family: "Baloo 2";
+        font-size: 1.125rem;
+        color: ${(props) => props.theme["gray-800"]};
+      }
     }
   }
 
