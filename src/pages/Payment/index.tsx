@@ -79,6 +79,22 @@ export function Payment() {
     setHouseNumber(houseNumber);
   }
 
+  function handleSelectAddress(event: ChangeEvent<HTMLInputElement>) {
+    setAddress(event.target.value);
+  }
+
+  function handleSelectDistrict(event: ChangeEvent<HTMLInputElement>) {
+    setDistrict(event.target.value);
+  }
+
+  function handleSelectCity(event: ChangeEvent<HTMLInputElement>) {
+    setSelectCity(event.target.value);
+  }
+
+  function handleSelectUf(event: ChangeEvent<HTMLInputElement>) {
+    setSelectUf(event.target.value);
+  }
+
   function handleFormOfPayment(paymentType: string) {
     setTypeOfPayment(paymentType);
   }
@@ -86,14 +102,21 @@ export function Payment() {
   function handleRegisterAddress(event: FormEvent) {
     event.preventDefault();
 
-    let complement = document.getElementById("complement") as HTMLInputElement;
+    const complement = (
+      document.getElementById("complement") as HTMLInputElement
+    ).value;
+
+    if (typeOfPayment === "") {
+      alert("Atenção, selecione a forma de pagamento");
+      return;
+    }
 
     const newRegisterAddress = {
       id: uuidv4(),
       zipCode: selectZipCode,
       road: address,
       houseNumber: houseNumber,
-      complement: complement.value,
+      complement: complement,
       city: selectCity,
       district: district,
       uf: selectUf,
@@ -102,6 +125,7 @@ export function Payment() {
 
     console.log(newRegisterAddress);
     setRegisterAddress([...registerAddress, newRegisterAddress]);
+    setAddress("");
   }
 
   async function handleLoadZipCode() {
@@ -114,7 +138,6 @@ export function Payment() {
         await axios
           .get("https://viacep.com.br/ws/" + selectZipCode + "/json/")
           .then((response) => {
-            console.log(response.data);
             const { logradouro, bairro, uf, localidade } = response.data;
 
             if (response.data.erro) {
@@ -182,7 +205,9 @@ export function Payment() {
                 <TextInput
                   placeholder="Rua"
                   name="address"
+                  id="address"
                   defaultValue={address}
+                  onChange={handleSelectAddress}
                   required
                 />
 
@@ -207,6 +232,7 @@ export function Payment() {
                     name="district"
                     id="district"
                     defaultValue={district}
+                    onChange={handleSelectDistrict}
                     required
                   />
                   <TextInput
@@ -214,6 +240,7 @@ export function Payment() {
                     name="city"
                     id="city"
                     defaultValue={selectCity}
+                    onChange={handleSelectCity}
                     required
                   />
 
@@ -222,6 +249,7 @@ export function Payment() {
                     name="uf"
                     id="uf"
                     defaultValue={selectUf}
+                    onChange={handleSelectUf}
                     required
                   />
                 </div>
