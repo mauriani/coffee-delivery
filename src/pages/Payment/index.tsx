@@ -18,6 +18,7 @@ import { BiCreditCard, BiMoney, BiCart } from "react-icons/bi";
 import { BsBank } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 import {
   ContainerPayment,
@@ -50,6 +51,8 @@ interface registerAddressProps {
 }
 
 export function Payment() {
+  const navigate = useNavigate();
+
   const { products, addItemCart, removeItemCart, removeOneItemCart } =
     useContext(CartContext);
 
@@ -107,7 +110,7 @@ export function Payment() {
     ).value;
 
     if (typeOfPayment === "") {
-      alert("Atenção, selecione a forma de pagamento");
+      alert("Atenção !! selecione a forma de pagamento");
       return;
     }
 
@@ -125,7 +128,7 @@ export function Payment() {
 
     console.log(newRegisterAddress);
     setRegisterAddress([...registerAddress, newRegisterAddress]);
-    setAddress("");
+    navigate("/paymentsuccess");
   }
 
   async function handleLoadZipCode() {
