@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import logo from "../../assets/Logo.svg";
 import { CartContext } from "../../contexts/CartContext";
@@ -13,12 +13,18 @@ export function Header() {
 
   const navigate = useNavigate();
 
+  function handleNavigateToHome() {
+    navigate("/");
+  }
+
   function handleNavigateToPayment() {
     navigate("/payment");
   }
   return (
     <Container>
-      <img src={logo} alt="" />
+      <button onClick={handleNavigateToHome}>
+        <img src={logo} alt="" />
+      </button>
 
       <ContainerCart>
         <div>

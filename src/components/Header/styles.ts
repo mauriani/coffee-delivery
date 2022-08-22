@@ -8,9 +8,22 @@ export const Container = styled.header`
   height: 6.5rem;
   padding: 2rem 10rem;
 
-  img {
+  > button {
+    border: 0;
+    background: transparent;
+
     height: 2.5rem;
     width: 5.309rem;
+
+    img {
+      height: 2.5rem;
+      width: 5.309rem;
+    }
+
+    :focus {
+      display: block;
+      box-shadow: 0px 0px 0px 2px transparent;
+    }
   }
 
   @media (max-width: 768px) {

@@ -22,9 +22,37 @@ export const ContainerPayment = styled.main`
     }
   }
 
+  > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    padding: 2rem;
+
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      color: ${(props) => props.theme["yellow-500"]};
+    }
+
+    span {
+      font-weight: 700;
+      font-family: "Baloo 2";
+      font-size: 1.35rem;
+      color: ${(props) => props.theme["gray-800"]};
+      text-align: center;
+    }
+  }
+
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
+
+    form {
+      flex-direction: column;
+    }
 
     padding: 1rem;
   }
