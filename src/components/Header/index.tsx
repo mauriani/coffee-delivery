@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../assets/Logo.svg";
 import { CartContext } from "../../contexts/CartContext";

@@ -1,4 +1,11 @@
-import { useEffect, useState, ChangeEvent, useContext, Fragment } from "react";
+import {
+  useEffect,
+  useState,
+  ChangeEvent,
+  useContext,
+  Fragment,
+  FormEvent,
+} from "react";
 import axios from "axios";
 
 import {
@@ -10,7 +17,7 @@ import {
 import { BiCreditCard, BiMoney, BiCart } from "react-icons/bi";
 import { BsBank } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { FaShoppingCart } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   ContainerPayment,
@@ -31,6 +38,7 @@ import { CartContext } from "../../contexts/CartContext";
 import { formatPrice } from "../../util/format";
 
 interface registerAddressProps {
+  id: string;
   zipCode: string;
   road: string;
   houseNumber: string;
@@ -38,6 +46,7 @@ interface registerAddressProps {
   city: string;
   district: string;
   uf: string;
+  typeOfPayment: string;
 }
 
 export function Payment() {
@@ -47,6 +56,8 @@ export function Payment() {
   const [totalItens, setTotalItems] = useState(0);
   const [totalValueItens, setTotalValueItens] = useState("");
   const [valueWithShipping, setValueWithShipping] = useState("");
+  const [typeOfPayment, setTypeOfPayment] = useState("");
+  const [houseNumber, setHouseNumber] = useState("");
   const [registerAddress, setRegisterAddress] = useState<
     registerAddressProps[]
   >([]);
@@ -63,36 +74,66 @@ export function Payment() {
     setSelectZipCode(zipCode);
   }
 
-  function handleRegisterAddress() {
-    console.log("handleRegisterAddress");
-
-    const newRegisterAddress = [];
+  function handleSelectHouseNumber(event: ChangeEvent<HTMLInputElement>) {
+    const houseNumber = event.target.value;
+    setHouseNumber(houseNumber);
   }
 
-  useEffect(() => {
-    async function handleLoadZipCode() {
-      const zipCode = selectZipCode.replace(/\D/g, "");
+  function handleFormOfPayment(paymentType: string) {
+    setTypeOfPayment(paymentType);
+  }
 
-      if (zipCode != "") {
-        const validateZipCode = /^[0-9]{8}$/;
+  function handleRegisterAddress(event: FormEvent) {
+    event.preventDefault();
 
-        if (validateZipCode.test(zipCode)) {
-          await axios
-            .get("https://viacep.com.br/ws/" + selectZipCode + "/json/")
-            .then((response) => {
-              const { logradouro, bairro, uf, localidade } = response.data;
+    let complement = document.getElementById("complement") as HTMLInputElement;
 
+    const newRegisterAddress = {
+      id: uuidv4(),
+      zipCode: selectZipCode,
+      road: address,
+      houseNumber: houseNumber,
+      complement: complement.value,
+      city: selectCity,
+      district: district,
+      uf: selectUf,
+      typeOfPayment: typeOfPayment,
+    };
+
+    console.log(newRegisterAddress);
+    setRegisterAddress([...registerAddress, newRegisterAddress]);
+  }
+
+  async function handleLoadZipCode() {
+    const zipCode = selectZipCode.replace(/\D/g, "");
+
+    if (zipCode != "") {
+      const validateZipCode = /^[0-9]{8}$/;
+
+      if (validateZipCode.test(zipCode)) {
+        await axios
+          .get("https://viacep.com.br/ws/" + selectZipCode + "/json/")
+          .then((response) => {
+            console.log(response.data);
+            const { logradouro, bairro, uf, localidade } = response.data;
+
+            if (response.data.erro) {
+              alert(`Atenção, cep inválido !`);
+            } else {
               setAddress(logradouro);
               setDistrict(bairro);
               setSelectCity(localidade);
               setSelectUf(uf);
-            })
-            .catch((error: string) => {
-              alert(`Atenção ${error}`);
-            });
-        }
+            }
+          })
+          .catch((error: string) => {
+            alert(`Atenção ${error}`);
+          });
       }
     }
+  }
+
+  useEffect(() => {
     handleLoadZipCode();
   }, [selectZipCode]);
 
@@ -115,7 +156,7 @@ export function Payment() {
   return (
     <ContainerPayment>
       {totalItens > 0 ? (
-        <form name="form" id="form" action="">
+        <form name="form" id="form" onSubmit={handleRegisterAddress}>
           <div>
             <h1>Complete seu pedido</h1>
             <ContainerAddress>
@@ -132,7 +173,8 @@ export function Payment() {
                   placeholder="CEP"
                   name="cep"
                   type="text"
-                  pattern="[0-9]{5}"
+                  size={10}
+                  maxLength={9}
                   value={selectZipCode}
                   onChange={handleSelectZipCode}
                   required
@@ -145,14 +187,25 @@ export function Payment() {
                 />
 
                 <div>
-                  <TextInput placeholder="Número" name="Número" required />
-                  <TextInput placeholder="Complemento" name="Complemento" />
+                  <TextInput
+                    placeholder="Número"
+                    id="number-house"
+                    name="number-house"
+                    onChange={handleSelectHouseNumber}
+                    required
+                  />
+                  <TextInput
+                    placeholder="Complemento"
+                    name="complement"
+                    id="complement"
+                  />
                 </div>
 
                 <div>
                   <TextInput
                     placeholder="Bairro"
                     name="district"
+                    id="district"
                     defaultValue={district}
                     required
                   />
@@ -188,15 +241,24 @@ export function Payment() {
               </Header>
 
               <footer>
-                <button>
+                <button
+                  type="button"
+                  onClick={() => handleFormOfPayment("Cartao de credito")}
+                >
                   <BiCreditCard size={16} />
                   Cartão de crédito
                 </button>
-                <button>
+                <button
+                  type="button"
+                  onClick={() => handleFormOfPayment("Cartao de debito")}
+                >
                   <BsBank size={16} />
                   cartão de débito
                 </button>
-                <button>
+                <button
+                  type="button"
+                  onClick={() => handleFormOfPayment("dinheiro")}
+                >
                   <BiMoney size={16} />
                   dinheiro
                 </button>
@@ -278,9 +340,7 @@ export function Payment() {
                   </footer>
                 </ContainerTotal>
 
-                <button type="submit" onClick={() => handleRegisterAddress()}>
-                  confirmar pedido
-                </button>
+                <button type="submit">confirmar pedido</button>
               </ContentProducts>
             </ContainerProducts>
           </div>
