@@ -18,7 +18,7 @@ import { BiCreditCard, BiMoney, BiCart } from "react-icons/bi";
 import { BsBank } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import {
   ContainerPayment,
@@ -52,6 +52,8 @@ interface registerAddressProps {
 
 export function Payment() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
 
   const { products, addItemCart, removeItemCart, removeOneItemCart } =
     useContext(CartContext);
@@ -126,9 +128,16 @@ export function Payment() {
       typeOfPayment: typeOfPayment,
     };
 
-    console.log(newRegisterAddress);
     setRegisterAddress([...registerAddress, newRegisterAddress]);
-    navigate("/paymentsuccess");
+
+    navigate("/paymentsuccess", {
+      state: {
+        road: address,
+        typeOfPayment: typeOfPayment,
+        uf: selectUf,
+        city: selectCity,
+      },
+    });
   }
 
   async function handleLoadZipCode() {
@@ -274,14 +283,14 @@ export function Payment() {
               <footer>
                 <button
                   type="button"
-                  onClick={() => handleFormOfPayment("Cartao de credito")}
+                  onClick={() => handleFormOfPayment("Cartão de crédito")}
                 >
                   <BiCreditCard size={16} />
                   Cartão de crédito
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleFormOfPayment("Cartao de debito")}
+                  onClick={() => handleFormOfPayment("Cartão de débito")}
                 >
                   <BsBank size={16} />
                   cartão de débito

@@ -1,10 +1,21 @@
 import { MdLocationOn } from "react-icons/md";
 import { MdOutlineTimer } from "react-icons/md";
+import { useLocation } from "react-router-dom";
+
 import { ContainerSuccess, ContentSuccess, IconContainer } from "./styles";
 
 import delivery from "../../assets/delivery.svg";
 
+type LocationState = {
+  from: {
+    path: string;
+  };
+};
 export function PaymentSuccess() {
+  // const { state } = useLocation<{ typeOfPayment: string }>();
+
+  // console.log(state.typeOfPayment);
+
   return (
     <ContainerSuccess>
       <div>

@@ -29,7 +29,7 @@ export function Header() {
       <ContainerCart>
         <div>
           <MdLocationOn size={22} />
-          Porto Alegre, RS
+          Serra, ES
         </div>
 
         <ButtonTotalCart type="button" onClick={handleNavigateToPayment}>
