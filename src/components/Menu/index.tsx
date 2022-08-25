@@ -1,9 +1,8 @@
-import { useEffect, useState, useContext, Fragment } from "react";
+import { useContext, Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdAdd, MdRemove } from "react-icons/md";
 
-import api from "../../services/api";
-import { formatPrice } from "../../util/format";
 import { CartContext } from "../../contexts/CartContext";
 import {
   ContainerMenu,
@@ -26,7 +25,13 @@ interface listProducts {
 }
 
 export function Menu() {
+  const navigate = useNavigate();
+
   const { products, addItemCart, removeItemCart } = useContext(CartContext);
+
+  function handleNavigateToPayment() {
+    navigate("/payment");
+  }
 
   return (
     <ContainerMenu>
@@ -40,7 +45,7 @@ export function Menu() {
                 <img src={product.image} alt="" />
 
                 <Tags>
-                  {product.type.map((type, key) => {
+                  {product.type.map((type) => {
                     return (
                       <Fragment key={`${product.id}-${type}`}>
                         <span>{type}</span>
@@ -73,7 +78,7 @@ export function Menu() {
                     </button>
                   </div>
 
-                  <Icon>
+                  <Icon onClick={handleNavigateToPayment} type="button">
                     <FaShoppingCart size={22} />
                   </Icon>
                 </ContentPrice>

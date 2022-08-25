@@ -153,10 +153,12 @@ export const ContentPrice = styled.div`
   }
 `;
 
-export const Icon = styled.footer`
+export const Icon = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border: 0;
 
   width: 2.375rem;
   height: 2.375rem;
@@ -166,6 +168,10 @@ export const Icon = styled.footer`
 
   svg {
     color: ${(props) => props.theme["white-000"]};
+  }
+
+  :focus {
+    box-shadow: 0px 0px 0px 2px ${(props) => props.theme["purble-500"]};
   }
 
   :hover {
