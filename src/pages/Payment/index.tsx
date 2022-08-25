@@ -35,7 +35,7 @@ import {
   ContainerTotal,
 } from "./styles";
 
-import { CartContext } from "../../contexts/CartContext";
+import { CartContext, Products } from "../../contexts/CartContext";
 import { formatPrice } from "../../util/format";
 
 interface registerAddressProps {
@@ -48,12 +48,11 @@ interface registerAddressProps {
   district: string;
   uf: string;
   typeOfPayment: string;
+  myCoffeeOrders: Products[];
 }
 
 export function Payment() {
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location);
 
   const { products, addItemCart, removeItemCart, removeOneItemCart } =
     useContext(CartContext);
@@ -116,6 +115,8 @@ export function Payment() {
       return;
     }
 
+    const myOrders = products.filter((product) => product.amount >= 1);
+
     const newRegisterAddress = {
       id: uuidv4(),
       zipCode: selectZipCode,
@@ -126,6 +127,7 @@ export function Payment() {
       district: district,
       uf: selectUf,
       typeOfPayment: typeOfPayment,
+      myCoffeeOrders: myOrders,
     };
 
     setRegisterAddress([...registerAddress, newRegisterAddress]);
@@ -136,6 +138,8 @@ export function Payment() {
         typeOfPayment: typeOfPayment,
         uf: selectUf,
         city: selectCity,
+        houseNumber: houseNumber,
+        district: district,
       },
     });
   }

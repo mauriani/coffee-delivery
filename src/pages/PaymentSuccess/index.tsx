@@ -6,15 +6,22 @@ import { ContainerSuccess, ContentSuccess, IconContainer } from "./styles";
 
 import delivery from "../../assets/delivery.svg";
 
-type LocationState = {
-  from: {
-    path: string;
-  };
-};
-export function PaymentSuccess() {
-  // const { state } = useLocation<{ typeOfPayment: string }>();
+interface LocationParams {
+  road: string;
+  typeOfPayment: string;
+  uf: string;
+  city: string;
+  houseNumber: string;
+  district: string;
+}
 
-  // console.log(state.typeOfPayment);
+export function PaymentSuccess() {
+  const location = useLocation();
+
+  const state = location.state as LocationParams;
+  const { road, typeOfPayment, uf, city, houseNumber, district } = state;
+
+  console.log(location.state);
 
   return (
     <ContainerSuccess>
@@ -30,8 +37,11 @@ export function PaymentSuccess() {
               <MdLocationOn />
             </IconContainer>
             <p>
-              Entrega em <span>Rua João Daniel Martinelli, 102</span>
-              <br /> Farrapos - Porto Alegre, RS
+              Entrega em{" "}
+              <span>
+                {road}, {houseNumber}
+              </span>
+              <br /> {district} - {city}, {uf}
             </p>
           </div>
 
@@ -54,7 +64,7 @@ export function PaymentSuccess() {
             <p>
               Pagamento na entrega
               <br />
-              <span>Cartão de Crédito</span>
+              <span>{typeOfPayment}</span>
             </p>
           </div>
         </div>

@@ -7,7 +7,7 @@ interface CartContextProviderProps {
   children: ReactNode;
 }
 
-interface Products {
+export interface Products {
   id: number;
   description: string;
   title: string;

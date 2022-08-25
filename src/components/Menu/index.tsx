@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Fragment } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdAdd, MdRemove } from "react-icons/md";
 
@@ -35,45 +35,50 @@ export function Menu() {
       <Content>
         {products.map((product: listProducts) => {
           return (
-            <Card key={product.id}>
-              <img src={product.image} alt="" />
+            <Fragment key={product.id}>
+              <Card>
+                <img src={product.image} alt="" />
 
-              <Tags>
-                {product.type.map((type) => {
-                  return (
-                    <>
-                      <span>{type}</span>
-                    </>
-                  );
-                })}
-              </Tags>
+                <Tags>
+                  {product.type.map((type, key) => {
+                    return (
+                      <Fragment key={`${product.id}-${type}`}>
+                        <span>{type}</span>
+                      </Fragment>
+                    );
+                  })}
+                </Tags>
 
-              <h1>{product.title}</h1>
-              <p>{product.description}</p>
+                <h1>{product.title}</h1>
+                <p>{product.description}</p>
 
-              <ContentPrice>
-                <span>{product.priceFormatted}</span>
+                <ContentPrice>
+                  <span>{product.priceFormatted}</span>
 
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => removeItemCart(product.id)}
-                  >
-                    <MdRemove />
-                  </button>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => removeItemCart(product.id)}
+                    >
+                      <MdRemove />
+                    </button>
 
-                  <input type="number" readOnly value={product.amount} />
+                    <input type="number" readOnly value={product.amount} />
 
-                  <button type="button" onClick={() => addItemCart(product.id)}>
-                    <MdAdd />
-                  </button>
-                </div>
+                    <button
+                      type="button"
+                      onClick={() => addItemCart(product.id)}
+                    >
+                      <MdAdd />
+                    </button>
+                  </div>
 
-                <Icon>
-                  <FaShoppingCart size={22} />
-                </Icon>
-              </ContentPrice>
-            </Card>
+                  <Icon>
+                    <FaShoppingCart size={22} />
+                  </Icon>
+                </ContentPrice>
+              </Card>
+            </Fragment>
           );
         })}
       </Content>
