@@ -23,6 +23,7 @@ interface CartContextType {
   addItemCart: (id: number) => void;
   removeItemCart: (id: number) => void;
   removeOneItemCart: (id: number) => void;
+  loadProducts: () => void;
   totalCart: number;
 }
 
@@ -134,6 +135,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         removeItemCart,
         totalCart,
         removeOneItemCart,
+        loadProducts,
       }}
     >
       {children}

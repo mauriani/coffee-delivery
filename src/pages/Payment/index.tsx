@@ -54,17 +54,19 @@ interface registerAddressProps {
 export function Payment() {
   const navigate = useNavigate();
 
-  const { products, addItemCart, removeItemCart, removeOneItemCart } =
-    useContext(CartContext);
+  const {
+    products,
+    addItemCart,
+    removeItemCart,
+    removeOneItemCart,
+    loadProducts,
+  } = useContext(CartContext);
 
   const [totalItens, setTotalItems] = useState(0);
   const [totalValueItens, setTotalValueItens] = useState("");
   const [valueWithShipping, setValueWithShipping] = useState("");
   const [typeOfPayment, setTypeOfPayment] = useState("");
   const [houseNumber, setHouseNumber] = useState("");
-  const [registerAddress, setRegisterAddress] = useState<
-    registerAddressProps[]
-  >([]);
 
   const [selectUf, setSelectUf] = useState("");
   const [selectCity, setSelectCity] = useState("");
@@ -130,7 +132,11 @@ export function Payment() {
       myCoffeeOrders: myOrders,
     };
 
-    setRegisterAddress([...registerAddress, newRegisterAddress]);
+    const stateJSON = JSON.stringify(newRegisterAddress);
+
+    localStorage.setItem("@coffee:delivery-1.0.0", stateJSON);
+
+    loadProducts();
 
     navigate("/paymentsuccess", {
       state: {
